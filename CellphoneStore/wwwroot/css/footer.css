@@ -1,0 +1,8 @@
+﻿.page-footer {
+    background-color: #343A40;
+    color: white;
+    /*clear: both;*/
+    margin-top: 3rem;
+    padding-top: 2rem;
+    height: 200px;
+}

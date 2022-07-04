@@ -1,0 +1,159 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.header {
+    margin-bottom: 2rem;
+}
+
+    .header .header-child-1 {
+        background-color: #343A40;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        padding: 1rem 8%;
+        justify-content: space-between;
+        color: #fff;
+        height: 4.5rem;
+    }
+
+.logo {
+    display: flex;
+    justify-content: center;
+    /* overflow: hidden; */
+    height: 2rem;
+}
+
+.brand-name > p {
+    padding-left: 10px;
+    /* align-items: center; */
+    line-height: 2rem;
+}
+
+.search-form {
+    background: #fff;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 1rem;
+    width: 30rem;
+    height: 2rem;
+    color: black;
+}
+
+    .search-form > input {
+        border: none;
+        height: 2rem;
+        text-transform: none;
+        width: 27rem;
+    }
+
+        .search-form > input:focus {
+            outline: none;
+        }
+
+.icons {
+    display: flex;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 120px;
+    height: fit-content;
+    text-align: left;
+    font-size: 14px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+.users:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.shoping-cart {
+    margin-right: 0.5rem;
+}
+
+.shoping-cart, .users {
+    border-radius: 1rem;
+    width: fit-content;
+    text-align: center;
+    height: 2rem;
+    line-height: 2rem;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+    .shoping-cart:hover, .users:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .users > a, .shoping-cart > a {
+        text-decoration: none;
+        color: #fff;
+        cursor: pointer;
+    }
+
+.header-child-2 {
+    background-color: #fed100;
+    text-align: center;
+}
+
+.navbar {
+    height: 3rem;
+}
+
+.nav-component {
+    background-color: #ffffff;
+    border-radius: 1.5rem;
+}
+
+    .nav-component:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+.nav-link {
+    color: black;
+}
+
+    .nav-link:hover {
+        color: black;
+    }
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
