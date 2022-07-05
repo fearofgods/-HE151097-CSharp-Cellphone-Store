@@ -25,6 +25,7 @@ namespace CellphoneStore.Controllers
             return View();
         }
 
+        [HttpPost]
         public string LoadTop4Products()
         {
             ProductLogics productLogics = new ProductLogics();
@@ -33,6 +34,34 @@ namespace CellphoneStore.Controllers
             return json;
         }
 
+        [HttpPost]
+        public string LoadNextTop4Products(int id)
+        {
+            ProductLogics productLogics = new ProductLogics();
+            if (id < 8)
+            {
+                List<Product> products = productLogics.GetNextTop4Products(id);
+                string json = JsonConvert.SerializeObject(products);
+                return json;
+            }
+            else
+            {
+                return "";
+
+            }
+
+
+        }
+
+        [HttpPost]
+        public string TopSell()
+        {
+            ProductLogics productLogics = new ProductLogics();
+            List<Product> test = productLogics.BestSellProduct();
+            string json = JsonConvert.SerializeObject(test);
+            return json;
+
+        }
         public IActionResult Privacy()
         {
             return View();

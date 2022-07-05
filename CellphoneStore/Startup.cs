@@ -49,7 +49,7 @@ namespace CellphoneStore
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id=0}");
 
                 endpoints.MapControllerRoute(
                     name: "map1",
