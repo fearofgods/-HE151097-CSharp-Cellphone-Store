@@ -52,6 +52,10 @@ namespace CellphoneStore
                     pattern: "{controller=Home}/{action=Index}/{id=0}");
 
                 endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id=0}/{value=0}");
+
+                endpoints.MapControllerRoute(
                     name: "map1",
                     pattern: "{controller=Home}/{action=Index}"
                     );

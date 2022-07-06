@@ -17,5 +17,10 @@ namespace CellphoneStore.Logics
         {
             return context.Categories.ToList();
         }
+
+        public Category GetCategoryById(int id)
+        {
+            return context.Categories.Where(x => x.Cid == id).FirstOrDefault();
+        }
     }
 }

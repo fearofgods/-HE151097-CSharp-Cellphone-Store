@@ -6,7 +6,7 @@ $(document).ready(function () {
         success: function (receive) {
             let categories = JSON.parse(receive);
             for (let i in categories) {
-                $('#catemenu').append(`<a class="dropdown-item" role="presentation" href="#">${categories[i].Cname}</a>`);
+                $('#catemenu').append(`<a class="dropdown-item" role="presentation" href="/Search/Product/${categories[i].Cid}">${categories[i].Cname}</a>`);
             }
         }
     });

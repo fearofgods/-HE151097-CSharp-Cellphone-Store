@@ -42,21 +42,24 @@
                 autoplay: true,
                 autoplayhoverpause: true,
                 autoplaytimeout: 100,
-                nav: true,
+                
                 loop: true,
                 margin: 0,
                 responsive: {
                     0: {
                         items: 1,
-                        dots: false
+                        dots: false,
+                        nav: true
                     },
                     600: {
                         items: 2,
-                        dots: false
+                        dots: false,
+                        nav: true
                     },
                     1000: {
                         items: 4,
-                        dots: false
+                        dots: false,
+                        nav: true
                     }
                 }
             });
@@ -117,6 +120,8 @@
                     }
                 }
             });
+        } else {
+            window.location = '/Search/Product';
         }
     });
 
