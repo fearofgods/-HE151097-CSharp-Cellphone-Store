@@ -1,0 +1,119 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    Product product = (Product)ViewData["Product"];
+    ProductDetail productDetail = (ProductDetail)ViewData["ProductDetails"];
+    List<ColorDetail> colors = (List<ColorDetail>)ViewData["ColorDetails"];
+    List<StorageDetail> storages = (List<StorageDetail>)ViewData["StorageDetails"];
+    ViewData["Title"] = product.Name;
+}
+@using CellphoneStore.Models
+@using System.Globalization
+
+
+<div class="row products-items">
+    <div class=" col-lg-12 col-md-12 col-sm-12">
+        <div class="title">
+            <h1>@product.Name</h1>
+        </div>
+    </div>
+
+    <div class="col-lg-7 col-md-7 left-items-content">
+        <div class="owl-carousel col-md-12 col-sm-12" id="slider">
+            <div class="col-lg-10 col-md-10 col-sm-10 item-carousel">
+                <img src="@product.Image" class="img-responsive" alt="">
+            </div>
+        </div>
+
+        <div class="info-device">
+            <h2>Thông tin sản phẩm</h2>
+            <p>
+                @product.Description
+            </p>
+        </div>
+    </div>
+
+    <div class="col-lg-5 col-md-5 right-items-content">
+
+        <div class="option">
+            <p>Lựa chọn màu sắc</p>
+            <form method="get" action="atc">
+                <div class="color-option">
+                    @foreach (ColorDetail color in colors)
+                    {
+                        <input type="radio" id="color-choice-@color.Id" name="color-choice" value="@color.Id">
+                        <label for="color-choice-@color.Id">@color.Color</label>
+                    }
+                </div>
+                <br>
+                <p>Lựa chọn bộ nhớ</p>
+                <div class="storage-option">
+                    @foreach (StorageDetail sd in storages)
+                    {
+                        <input type="radio" id="storage-choice-@sd.Id" name="storage-choice" value="@sd.Id">
+                        <label for="storage-choice-@sd.Id">@sd.Storage</label>
+                    }
+                </div>
+                <br>
+                <div class="price">
+                    <p id="price-title">Giá niêm yết:</p>
+                    <p id="price-content">&nbsp;&nbsp;@product.Price.ToString("C",CultureInfo.CreateSpecificCulture("vn-VN")).Substring(1).Replace(",",".")đ</p>
+                </div>
+                <div class="btn">
+                    <a onclick="buy(${pd.id})"><input id="btn-1" type="button" value="Thêm vào giỏ" /></a>
+                </div>
+            </form>
+
+        </div>
+        <h2>Cấu hình thiết bị</h2>
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <td>Màn hình:</td>
+                    <td>@productDetail.Screen</td>
+                </tr>
+                <tr>
+                    <td>Hệ điều hành:</td>
+                    <td>@productDetail.Os</td>
+                </tr>
+                <tr>
+                    <td>Camera sau:</td>
+                    <td>@productDetail.Frontcam</td>
+                </tr>
+                <tr>
+                    <td>Camera trước:</td>
+                    <td>@productDetail.Rearcam</td>
+                </tr>
+                <tr>
+                    <td>Chip:</td>
+                    <td>@productDetail.Soc</td>
+                </tr>
+                <tr>
+                    <td>RAM:</td>
+                    <td>@productDetail.Ram</td>
+                </tr>
+                <tr>
+                    <td>SIM:</td>
+                    <td>@productDetail.Sim</td>
+                </tr>
+                <tr>
+                    <td>Pin, Sạc:</td>
+                    <td>@productDetail.Battery</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+<script src="~/js/detail.js"></script>
+}
+
+@section Styles{
+<link rel="stylesheet" href="~/css/detail.css">
+}

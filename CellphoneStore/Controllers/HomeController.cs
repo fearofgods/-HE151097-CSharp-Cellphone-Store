@@ -44,13 +44,7 @@ namespace CellphoneStore.Controllers
                 string json = JsonConvert.SerializeObject(products);
                 return json;
             }
-            else
-            {
-                return "";
-
-            }
-
-
+            else return "";
         }
 
         [HttpPost]

@@ -1,0 +1,89 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="d-flex justify-content-center align-items-center mt-5">
+    <div class="card">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item text-center">
+                <a class="nav-link active btl" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                   aria-controls="pills-home" aria-selected="true">Đăng nhập</a>
+            </li>
+            <li class="nav-item text-center">
+                <a class="nav-link btr" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                   aria-controls="pills-profile" aria-selected="false">Đăng kí</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <form action="/Authentication/Login" method="post" class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                  aria-labelledby="pills-home-tab">
+                <div class="form px-4 pt-5">
+                    <div class="items">
+                        <span class="items_icon">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+
+                        <input type="text" name="login-username" class="form-control" placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="items">
+                        <span class="items_icon">
+                            <i class="fa-solid fa-key"></i>
+                        </span>
+                        <input type="password" name="login-password" class="form-control" placeholder="Mật khẩu">
+                    </div>
+                    <div class="items">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="true" name="remember">
+                                Nhớ mật khẩu
+                            </label>
+                        </div>
+                    </div>
+                    <div class="message">
+                        <span id="login-message"></span>
+                    </div>
+                    <input type="button" class="btn btn-dark btn-block" name="login-btn" value="Đăng nhập"/>
+                </div>
+            </form>
+            <form action="register" method="post" class="tab-pane fade" id="pills-profile" role="tabpanel"
+                  aria-labelledby="pills-profile-tab">
+                <div class="form px-4">
+                    <div class="items">
+                        <input type="text" name="firstname" class="form-control" placeholder="Họ và tên đệm">
+
+                    </div>
+                    <div class="items">
+                        <input type="text" name="lastname" class="form-control" placeholder="Tên">
+                    </div>
+                    <div class="items">
+                        <input type="email" name="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="items">
+                        <input type="text" name="username" class="form-control" placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="items">
+                        <input type="password" name="password" class="form-control" id="password"
+                               placeholder="Mật khẩu">
+                    </div>
+                    <div class="items">
+                        <input type="password" name="repassword" class="form-control" id="repassword"
+                               placeholder="Nhập lại mật khẩu">
+                    </div>
+                    <div class="message">
+                        <span id="register-message"></span>
+                    </div>
+                    <input type="button" class="btn btn-dark btn-block" value="Đăng kí">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script src="~/js/authentications.js"></script>
+}
+
+@section Styles{
+<link rel="stylesheet" href="~/css/authentication.css">
+}

@@ -1,4 +1,17 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string json = Context.Session.GetString("user");
+    User userX = null;
+    if (!string.IsNullOrEmpty(json))
+    {
+        userX = JsonConvert.DeserializeObject<User>(json);
+    }
+}
+
+@using CellphoneStore.Models
+@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,8 +37,8 @@
     <link rel="stylesheet" href="~/css/footer.css">
     <link rel="stylesheet" href="~/css/layout.css">
     @await RenderSectionAsync("Styles", required: false)
-@*
-    <link rel="stylesheet" href="~/CellphoneStore.styles.css">*@
+    @*
+        <link rel="stylesheet" href="~/CellphoneStore.styles.css">*@
 
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -39,8 +52,8 @@
             </div>
 
 
-            <form action="/Search/Product" class="search-form">
-                <input type="search" name="id" placeholder="Bạn muốn tìm gì?" id="search-box">
+            <form action="/Search/SearchByName" class="search-form">
+                <input type="search" name="value" placeholder="Bạn muốn tìm gì?" id="search-box" value="@((string)ViewData["SearchData"]!=null?(string)ViewData["SearchData"]:"")">
                 <label for="search-box" class="fas fa-search"></label>
             </form>
             <div class="icons">
@@ -48,26 +61,29 @@
                     <div class="fas fa-shopping-cart"></div>
                     <a href="#">Giỏ hàng</a>
                 </div>
-                @*<c:if test="${sessionScope.user != null}">
+                @if (userX != null)
+                {
                     <div class="users">
-                    <div class="fas fa-user"></div>
-                    <a href="#">Xin chào, Admin</a>
-                    <div class="dropdown-content">
-                    <c:if test="${sessionScope.user.role == 'sa'}">
-                    <a href="#">Trang quản lí</a>
-                    </c:if>
-                    <a href="#">Thông tin tài khoản</a>
-                    <a href="#">Đơn hàng</a>
-                    <a href="#">Đăng xuất</a>
+                        <div class="fas fa-user"></div>
+                        <a href="#">Xin chào, @userX.Lastname</a>
+                        <div class="dropdown-content">
+                            @if (userX.Role == "sa")
+                            {
+                                <a href="#">Trang quản lí</a>
+                            }
+                            <a href="#">Thông tin tài khoản</a>
+                            <a href="#">Đơn hàng</a>
+                            <a href="/Authentication/Logout">Đăng xuất</a>
+                        </div>
                     </div>
+                }
+                else
+                {
+                    <div class="users">
+                        <div class="fas fa-user"></div>
+                        <a href="/Authentication/Authentications">Đăng nhập</a>
                     </div>
-                    </c:if>*@
-                @*<c:if test="${sessionScope.user == null}">*@
-                <div class="users">
-                    <div class="fas fa-user"></div>
-                    <a href="#">Đăng nhập</a>
-                </div>
-                @*</c:if>*@
+                }
             </div>
         </div>
         <div class="header-child-2">
@@ -87,10 +103,10 @@
                             <li class="nav-component dropdown ">
                                 <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Sản phẩm theo giá</a>
                                 <div class="dropdown-menu" role="menu">
-                                    <a class="dropdown-item" role="presentation" href="#">Từ 4 - 5 triệu</a>
-                                    <a class="dropdown-item" role="presentation" href="#">Từ 5 - 10 triệu</a>
-                                    <a class="dropdown-item" role="presentation" href="#">Từ 10 - 30 triệu</a>
-                                    <a class="dropdown-item" role="presentation" href="#">Từ 30 - 50 triệu</a>
+                                    <a class="dropdown-item" role="presentation" href="/Search/ProductByPrice/4-5">Từ 4 - 5 triệu</a>
+                                    <a class="dropdown-item" role="presentation" href="/Search/ProductByPrice/5-10">Từ 5 - 10 triệu</a>
+                                    <a class="dropdown-item" role="presentation" href="/Search/ProductByPrice/10-30">Từ 10 - 30 triệu</a>
+                                    <a class="dropdown-item" role="presentation" href="/Search/ProductByPrice/30-50">Từ 30 - 50 triệu</a>
                                 </div>
                             </li>
                             <li class="nav-component dropdown">

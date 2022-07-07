@@ -1,0 +1,134 @@
+﻿
+body {
+    height: 100%;
+    background-image: none;
+}
+
+.container {
+    min-height: 100%;
+    position: relative;
+}
+
+h1 {
+    font-size: 25px;
+    padding-left: 1rem;
+    font-weight: 600;
+}
+
+#slider {
+    height: 450px;
+    width: 450px;
+}
+
+.owl-carousel {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.option {
+    margin-bottom: 2rem;
+    border: 1px solid #343A40;
+    border-radius: 1rem;
+    padding-left: 10px;
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
+.color-option, .storage-option, .price {
+    padding-left: 10px;
+}
+
+.price {
+    display: flex;
+}
+
+#price-content {
+    color: #D70018;
+    font-weight: bolder;
+}
+
+.btn {
+    width: 100%;
+    align-items: center;
+}
+
+    .btn > button {
+        border: none;
+        border-radius: 0.5rem;
+    }
+
+#btn-1 {
+    border: none;
+    background-color: rgb(255, 145, 0);
+    color: white;
+    width: 90%;
+    transition: transform .1s;
+    height: 25px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+    #btn-1:hover {
+        transform: scale(1.05);
+    }
+
+.title {
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+    margin-bottom: 2rem;
+}
+
+.left-content {
+    font-weight: 900;
+    width: 140px;
+    padding: 0 5px 0 10px !important;
+}
+
+.info-device {
+    margin-top: 3rem;
+    max-width: 635px;
+}
+
+    .info-device > p > img {
+        max-width: 635px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+h2 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.right-content {
+    width: (100%-100px);
+}
+
+.left-items-content {
+    margin-bottom: 2rem;
+}
+
+.color-option > input, .storage-option > input {
+    display: none;
+    margin-right: 10px;
+}
+
+    .color-option > input + label, .storage-option > input + label {
+        display: inline-block;
+        background-color: #cecaca;
+        border-color: #343A40;
+        border-radius: 1rem;
+        width: 100%;
+        max-width: 100px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        font-size: 17px;
+    }
+
+    .color-option > input:checked + label, .storage-option > input:checked + label {
+        background-image: none;
+        background-color: #d0d0d0;
+        border: 1px solid #2f80ed;
+        color: #2f80ed;
+    }

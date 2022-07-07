@@ -207,7 +207,7 @@ h3 {
     margin-bottom: 10px;
 }
 
-.btn > button {
+#home-loadmore {
     border: none;
     border-radius: 1rem;
     background-color: grey;

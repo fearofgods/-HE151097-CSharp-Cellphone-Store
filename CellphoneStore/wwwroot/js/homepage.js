@@ -19,7 +19,7 @@
                 content += `<div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="item-top">
                                             <div class="item-top-img">
-                                                <a href="#"><img src="${object[item].Image}" alt="${object[item].Name}"></a>
+                                                <a href="/Details/ProductDetails/${object[item].Pid}"><img src="${object[item].Image}" alt="${object[item].Name}"></a>
                                             </div>
                                             <div class="item-top-title">
                                                 <h2>${object[item].Name}</h2>
@@ -76,7 +76,7 @@
                     `<div class="col-lg-3 col-md-4 col-sm-6 product">
                          <div class="item-wrapper">
                              <div class="item-img">
-                                 <a href="#"><img src="${object[item].Image}" class="img-responsive img-i" alt="${object[item].Name}"></a>
+                                 <a href="/Details/ProductDetails/${object[item].Pid}"><img src="${object[item].Image}" class="img-responsive img-i" alt="${object[item].Name}"></a>
                              </div>
                              <div class="item-price">
                                  <h3>${object[item].Name}</h3>
@@ -92,7 +92,7 @@
 
     $('#home-loadmore').click(function () {
         let amount = document.getElementsByClassName("product").length;
-        //console.log(amount);
+        console.log(amount);
         if (amount < 8) {
             $.ajax({
                 type: "post",
@@ -108,7 +108,7 @@
                             `<div class="col-lg-3 col-md-4 col-sm-6 product">
                             <div class="item-wrapper">
                                  <div class="item-img">
-                                     <a href="#"><img src="${object[item].Image}" class="img-responsive img-i" alt="${object[item].Name}"></a>
+                                     <a href="/Details/ProductDetails/${object[item].Pid}"><img src="${object[item].Image}" class="img-responsive img-i" alt="${object[item].Name}"></a>
                                  </div>
                                  <div class="item-price">
                                      <h3>${object[item].Name}</h3>
@@ -117,6 +117,11 @@
                              </div>
                         </div>`
                         );
+                    }
+                    amount = document.getElementsByClassName("product").length;
+                    console.log(amount)
+                    if (amount == 8) {
+                        document.getElementById('home-loadmore').value = "Xem tất cả";
                     }
                 }
             });

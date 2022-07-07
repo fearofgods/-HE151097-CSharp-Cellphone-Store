@@ -4,16 +4,11 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Product";
-    Category category = (Category)ViewData["Category"];
+
     int currentPage = (int)ViewData["CurrentPage"];
     int totalPage = (int)ViewData["TotalPage"];
-    int cid = 0;
-    if (category != null)
-    {
-        cid = category.Cid;
-    }
-    
-
+    string searchValue = (string)ViewData["SearchValue"];
+    string searchTitle = (string)ViewData["SearchTitle"];
 }
 @using CellphoneStore.Models
 @using System.Globalization
@@ -22,14 +17,7 @@
 <div class="default-list col-md-12 col-12 col-sm-12">
     <div class="row">
         <div class="col-md-12 col-sm-12 block-header">
-            @if (category != null)
-            {
-                <h1>Các sản phẩm của @category.Cname</h1>
-            }
-            else
-            {
-                <h1>Tất cả các sản phẩm</h1>
-            }
+            <h1>Các sản phẩm từ @searchTitle</h1>
         </div>
         @if (Model.Any())
         {
@@ -63,21 +51,20 @@
         <nav aria-label="...">
             <ul class="pagination">
                 <li class="page-item @(currentPage == 0 ? "disabled" : "")">
-                    <a class="page-link" href="@(currentPage == totalPage ? "" : $"/Search/Product/{cid}/{currentPage - 1}")" tabindex="-1"><i class="fa-solid fa-angles-left"></i></a>
+                    <a class="page-link" href="@(currentPage == totalPage ? "" : $"/Search/ProductByPrice/{searchValue}/{currentPage - 1}")" tabindex="-1"><i class="fa-solid fa-angles-left"></i></a>
                 </li>
                 @for (int i = 0; i < totalPage; i++)
                 {
                     <li class="page-item @(currentPage == i ? "active" : "") ">
-                        <a class="page-link" href="/Search/Product/@cid/@i">@(i+1)</a>
+                        <a class="page-link" href="/Search/ProductByPrice/@searchValue/@i">@(i+1)</a>
                     </li>
                 }
                 <li class="page-item @(currentPage == totalPage - 1 ? "disabled" : "")">
-                    <a class="page-link" href="@(currentPage == totalPage - 1 ? "" : $"/Search/Product/{cid}/{currentPage + 1}")"><i class="fa-solid fa-angles-right"></i></a>
+                    <a class="page-link" href="@(currentPage == totalPage - 1 ? "" : $"/Search/ProductByPrice/{searchValue}/{currentPage + 1}")"><i class="fa-solid fa-angles-right"></i></a>
                 </li>
             </ul>
         </nav>
     }
-
 </div>
 
 @section Styles{

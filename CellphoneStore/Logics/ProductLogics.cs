@@ -9,10 +9,14 @@ namespace CellphoneStore.Logics
     public class ProductLogics
     {
         WebContext context;
-
+        IConfiguration config;
+        int paging;
         public ProductLogics()
         {
             context = new WebContext();
+            config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            paging = Convert.ToInt32(config.GetSection("PageSettings")["Paging"]);
+
         }
 
         public List<Product> GetTop4Product()
@@ -64,24 +68,63 @@ namespace CellphoneStore.Logics
                 return context.Products.Where(x => x.Cid == cateId).ToList().Count;
             }
 
-            
+
         }
 
         public List<Product> SearchByCategoryPaging(int id, int skip)
         {
-            var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            int paging = Convert.ToInt32(config.GetSection("PageSettings")["Paging"]);
+
             if (id == 0)
             {
-                return context.Products.Skip(skip*paging).Take(paging).ToList();
+                return context.Products.Skip(skip * paging).Take(paging).ToList();
             }
             else
             {
-                return context.Products.Where(x => x.Cid == id).Skip(skip*paging).Take(paging).ToList();
+                return context.Products.Where(x => x.Cid == id).Skip(skip * paging).Take(paging).ToList();
             }
         }
 
+        public int GetAllProductsByPrice(int from, int to)
+        {
+            return context.Products.Where(x => x.Price >= from * 1000000 && x.Price <= to * 1000000).ToList().Count;
+        }
 
-        
+        public List<Product> SearchByPricePaging(int from, int to, int skip)
+        {
+            //int paging = Convert.ToInt32(config.GetSection("PageSettings")["Paging"]);
+            return context.Products.Where(x => x.Price >= from * 1000000 && x.Price <= to * 1000000).Skip(skip * paging).Take(paging).ToList();
+        }
+
+        public int GetAllProductsByName(string search)
+        {
+            return context.Products.Where(x => x.Name.Contains(search)).ToList().Count;
+        }
+
+        public List<Product> SearchByName(string search, int skip)
+        {
+            return context.Products.Where(x => x.Name.Contains(search)).Skip(skip).Take(paging).ToList();
+        }
+
+        //Product details
+
+        public ProductDetail GetProductDetail(string pid)
+        {
+            return context.ProductDetails.Where(x => x.Pid.Equals(pid)).FirstOrDefault();
+        }
+
+        public List<ColorDetail> GetColorDetail(string pid)
+        {
+            return context.ColorDetails.Where(x => x.Pid.Equals(pid)).ToList();
+        }
+
+        public List<StorageDetail> GetStorageDetails(string pid)
+        {
+            return context.StorageDetails.Where(x => x.Pid.Equals(pid)).ToList();
+        }
+
+        public Product GetProductByPid(string pid)
+        {
+            return context.Products.Where(x => x.Pid.Equals(pid)).FirstOrDefault();
+        }
     }
 }
