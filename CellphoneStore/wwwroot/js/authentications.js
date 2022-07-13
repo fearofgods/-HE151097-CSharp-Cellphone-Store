@@ -60,6 +60,69 @@
         });
     });
 
+
+    $('input[name=register-btn]').click(function () {
+        $.ajax({
+            type: "post",
+            url: "/Authentication/Register",
+            data: {
+                Firstname: $('input[name=firstname]').val(),
+                Lastname: $('input[name=lastname]').val(),
+                Email: $('input[name=email]').val(),
+                Username: $('input[name=username]').val(),
+                Password: $('input[name=password]').val()
+            },
+            success: function (response) {
+                console.log(response);
+                if (response != null && response != undefined) {
+                    //let result = JSON.parse(response);
+                    if (response.status === 'Success') {
+                        $('#register-message').html(response.content).css('color', 'green');
+                        let input_form = document.getElementsByClassName("form-control");
+                        for (let input in input_form) {
+                            input_form[input].value = "";
+                        }
+                        $("#register-message-wrapper").append(`<br><span id="login-back"><a id="login-back-link"><<Ấn vào đây để đăng nhập!</a></span>`);
+                        $("#login-back-link").css("color", "royalblue");
+                        $("#login-back-link").click(function () {
+                            $('#pills-home-tab').tab('show');
+                            $('#login-back').remove();
+                            $('#register-message').html("");
+                        });
+
+                    } else if (response.status === 'Fail') {
+                        $('#register-message').html(response.content).css('color', 'red');
+
+                    }
+                }
+            }
+        });
+    });
+
+
+    function findGetParameter(parameterName) {
+        var result = null,
+            tmp = [];
+        location.search
+            .substr(1)
+            .split("&")
+            .forEach(function (item) {
+                tmp = item.split("=");
+                if (tmp[0] === parameterName)
+                    result = decodeURIComponent(tmp[1]);
+            });
+        return result;
+    }   
+
+    let status = findGetParameter('code');
+    console.log(status);
+    if (status != null && status != undefined) {
+        if (status == '403') {
+            $('#login-message').html('Bạn không có quyền truy cập!').css('color', 'red');
+        } else if (status == '401') {
+            $('#login-message').html('Bạn phải đăng nhập trước!!').css('color', 'red');
+        }
+    }
 });
 
 

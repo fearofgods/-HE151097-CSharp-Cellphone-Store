@@ -1,0 +1,72 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Profile";
+
+
+    string json = Context.Session.GetString("user");
+    User userX = null;
+    if (!string.IsNullOrEmpty(json))
+    {
+        userX = JsonConvert.DeserializeObject<User>(json);
+    }
+}
+<div class="row content">
+    <div class="col-md-12 profile-header">
+        <h1>Thông tin cá nhân</h1>
+        <p>@ViewData["Message"]</p>
+    </div>
+    <div class="col-md-12 profile-body">
+        <form action="profile" method="post">
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td>Họ</td>
+                        <td><input class="input-group" type="text" name="Firstname" value="@userX.Firstname" id="firstname"></td>
+                    </tr>
+                    <tr>
+                        <td>Tên</td>
+                        <td><input class="input-group" type="text" name="Lastname" value="@userX.Lastname" id="lastname"></td>
+                    </tr>
+                    <tr>
+                        <td>Ngày sinh</td>
+                        @{
+                            string birthday = String.Format("{0:yyyy/MM/dd}", userX.Birthday);
+                        }
+                        <td><input class="input-group" type="date" name="Birthday" value="@birthday" id="birthday"></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input class="input-group" type="email" name="Email" value="@userX.Email" id="email"></td>
+                    </tr>
+                    <tr>
+                        <td>Số điện thoại</td>
+                        <td><input class="input-group" type="text" name="Phone" value="@userX.Phone" id="phone"></td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ</td>
+                        <td><input class="input-group" type="text" name="Address" value="@userX.Address" id="address"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="submit">
+                <input type="submit" value="Lưu">
+            </div>
+        </form>
+
+
+    </div>
+
+</div>
+
+@section Scripts {
+<script src="~/js/detail.js"></script>
+}
+
+@section Styles{
+<link rel="stylesheet" href="~/css/profile.css">
+}

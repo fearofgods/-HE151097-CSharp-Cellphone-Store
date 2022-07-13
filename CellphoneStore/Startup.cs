@@ -1,3 +1,4 @@
+using CellphoneStore.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -47,6 +48,8 @@ namespace CellphoneStore
             app.UseAuthorization();
 
             app.UseSession();
+
+            app.UseMiddleware<CheckAccessMiddleware>();
             
             app.UseEndpoints(endpoints =>
             {

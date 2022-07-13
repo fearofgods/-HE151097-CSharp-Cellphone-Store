@@ -11,8 +11,9 @@
         type: "post",
         url: "/Home/TopSell",
         success: function (response) {
-            let object = JSON.parse(response);
 
+            let object = JSON.parse(response);
+            console.log(object);
             let content = "";
 
             for (let item in object) {

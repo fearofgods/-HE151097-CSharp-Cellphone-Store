@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Dashboard";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#home">Doanh thu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu1">Top bán chạy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu2">Tổng đơn hàng</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane container active" id="home">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div class="tab-pane container fade" id="menu1">
+                    <canvas id="myChart2"></canvas>
+                </div>
+                <div class="tab-pane container fade" id="menu2">
+                    <a>Click</a>
+                    <a>Click2</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts {
+<script src="~/js/dashboard.js"></script>
+}
+
+
+
+@section Styles{
+<link rel="stylesheet" href="~/css/dashboard.css">
+}

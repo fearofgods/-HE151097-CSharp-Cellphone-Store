@@ -1,0 +1,370 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+.my-sidenav {
+    width: 0px;
+    background-color: black;
+    height: 100vh;
+    position: fixed;
+    z-index: 1;
+    top: 2rem;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s
+}
+
+    .my-sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 18px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+        /* border: 1px solid #ffffff; */
+    }
+
+        .my-sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+    .my-sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 15px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+.second-nav {
+    display: flex;
+}
+
+    .second-nav a, .second-nav select, .second-nav label {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .second-nav select {
+        height: 30px;
+        width: 150px;
+    }
+
+.check-modal {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 998;
+    display: none;
+}
+
+.modal-delete-content {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: #ffffff;
+    height: 200px;
+    width: 300px;
+    border-radius: 1rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+}
+
+.modal-delete-header {
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    background-color: #fed100;
+    width: 100%;
+    height: 2rem;
+}
+
+    .modal-delete-header > p {
+        line-height: 2rem;
+        padding-left: 10px;
+    }
+
+.modal-delete-icon {
+    text-align: center;
+    font-size: 30px;
+}
+
+.modal-delete-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 48%;
+    transform: translate(-50%);
+}
+
+.modal-delete-btn-1, .modal-delete-btn-2 {
+    border: none;
+    border-radius: 2rem;
+    color: #f1f1f1;
+}
+
+.modal-delete-btn-1 {
+    background-color: rgb(20, 150, 20);
+}
+
+.modal-delete-btn-2 {
+    background-color: rgb(196, 20, 20);
+}
+
+#menu {
+    font-size: 25px;
+    position: absolute;
+    color: #ffffff;
+    top: 18px;
+    left: 20px;
+}
+
+.my-modal {
+    margin-top: 5rem;
+    background-color: #fed100;
+    height: 100px;
+    border-radius: 0.5rem;
+    color: #343A40;
+}
+
+.inside-modal {
+    text-align: center;
+    padding-top: 15px
+}
+
+.modal-info {
+    font-size: 30px;
+}
+
+.content {
+    top: 4rem;
+    margin-bottom: 5rem;
+}
+
+.item-img {
+    width: 60px;
+}
+
+.paging-wrapper {
+    width: 100%;
+}
+
+.paging {
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+}
+
+.paging-items {
+    margin-right: 15px;
+}
+
+h1 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+}
+
+    .header .header-child-1 {
+        background-color: #343A40;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        padding: 1rem 8%;
+        justify-content: space-between;
+        color: #fff;
+        height: 4.5rem;
+    }
+
+.logo {
+    display: flex;
+    justify-content: center;
+    /* overflow: hidden; */
+    height: 2rem;
+}
+
+.brand-name > p {
+    padding-left: 10px;
+    /* align-items: center; */
+    line-height: 2rem;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 120px;
+    height: fit-content;
+    text-align: left;
+    font-size: 14px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+.users:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.search-form {
+    background: #fff;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 1rem;
+    width: 30rem;
+    height: 2rem;
+    color: black;
+}
+
+    .search-form > input {
+        border: none;
+        height: 2rem;
+        text-transform: none;
+        width: 27rem;
+    }
+
+        .search-form > input:focus {
+            outline: none;
+        }
+
+.icons {
+    display: flex;
+}
+
+.shoping-cart {
+    margin-right: 0.5rem;
+}
+
+.shoping-cart, .users {
+    border-radius: 1rem;
+    width: fit-content;
+    text-align: center;
+    height: 2rem;
+    line-height: 2rem;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+    .shoping-cart:hover, .users:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .users > a, .shoping-cart > a {
+        text-decoration: none;
+        color: #fff;
+        cursor: pointer;
+    }
+
+.header-child-2 {
+    background-color: #fed100;
+    text-align: center;
+}
+
+.navbar {
+    height: 3rem;
+}
+
+.nav-component {
+    background-color: #ffffff;
+    border-radius: 1.5rem;
+}
+
+    .nav-component:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+.nav-link {
+    color: black;
+}
+
+    .nav-link:hover {
+        color: black;
+    }
+
+.chart-wrapper {
+    width: 100%;
+}
+
+.chart {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dilivery-info {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 10px 0px 10px 10px;
+    background-color: #343A40;
+    color: #ffffff;
+}
+
+.payment {
+    background-color: #343A40;
+    height: 40px;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+.form-new {
+    margin-bottom: 2rem;
+}
+
+    .form-new > input {
+        width: 250px;
+        height: 25px;
+        margin-bottom: 1rem;
+    }
+
+    .form-new > select {
+        width: 250px;
+        height: 25px;
+    }
+
+    .form-new > textarea {
+        resize: none;
+    }
+
+#main{
+    margin-top:85px;
+}
