@@ -94,8 +94,9 @@ h2 {
 .block-header {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    background: transparent;
-    background-image: url(https://cdn.discordapp.com/attachments/892072635675050054/940320609576050708/tagline_desktop.png);
+    /*background: transparent;
+    background-image: url(https://cdn.discordapp.com/attachments/892072635675050054/940320609576050708/tagline_desktop.png);*/
+    background-color: #009EC1;
     margin-bottom: 20px;
 }
 

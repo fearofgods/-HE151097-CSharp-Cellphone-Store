@@ -54,12 +54,12 @@ body {
     }
 
 .check-modal {
-    background-color: rgba(0, 0, 0, 0.5);
     width: 100vw;
     height: 100vh;
     position: absolute;
     z-index: 998;
     display: none;
+    padding: 0;
 }
 
 .modal-delete-content {
@@ -140,7 +140,7 @@ body {
 }
 
 .content {
-    top: 4rem;
+    /*top: 4rem;*/
     margin-bottom: 5rem;
 }
 
@@ -149,7 +149,8 @@ body {
 }
 
 .paging-wrapper {
-    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .paging {

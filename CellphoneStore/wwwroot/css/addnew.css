@@ -1,0 +1,55 @@
+﻿.tab-content {
+    margin-bottom: 2rem;
+    background-color: #8DC9FF;
+    padding-bottom: 1rem;
+}
+
+.active {
+    background-color: #8DC9FF;
+}
+
+select {
+    width: 400px;
+    height: 30px;
+}
+
+input{
+    width: 400px;
+}
+
+textarea {
+    width: 400px;
+}
+
+#color-add, #storage-add {
+    color: black;
+}
+
+.alert{
+    display:none;
+    position: absolute;
+    z-index: 10;
+    top: 90px;
+    right : 0px;    
+}
+
+.save{
+    background-color: green;
+    color: white;
+}
+
+    .save:hover {
+        color: white;
+    }
+
+.delete-color, .delete-storage {
+    background-color: #E21616;
+    width: 50px;
+    color: white;
+    border: 1px solid #E21616;
+    border-radius: 5px;
+}
+
+.color-items, .storage-items {
+    margin-bottom: 5px;
+}

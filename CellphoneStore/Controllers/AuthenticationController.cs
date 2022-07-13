@@ -24,12 +24,35 @@ namespace CellphoneStore.Controllers
             if (Login != null)
             {
                 HttpContext.Session.SetString("user", json);
-                var message = new
+                if (Login.Role.Equals("sa"))
                 {
-                    Status = "Success",
-                    Content = "Pass"
-                };
-                return Json(message);
+                    var message = new
+                    {
+                        Status = "Success",
+                        Content = "Pass",
+                        IsAdmin = "true"
+                    };
+                    return Json(message);
+                }else if (Login.Role.Equals("us"))
+                {
+                    var message = new
+                    {
+                        Status = "Success",
+                        Content = "Pass",
+                        IsAdmin = "false"
+                    };
+                    return Json(message);
+                }
+                else
+                {
+                    var message = new
+                    {
+                        Status = "Fail",
+                        Content = "Bạn không có quyền truy cập"
+                    };
+                    return Json(message);
+                }
+                
             }
             else
             {

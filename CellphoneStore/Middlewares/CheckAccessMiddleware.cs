@@ -31,7 +31,7 @@ namespace CellphoneStore.Middlewares
 
             string path = httpContext.Request.Path;
             
-            if (path.StartsWith("/Admin") == true)
+            if (path.StartsWith("/Admin") == true || path.StartsWith("/admin") == true)
             {
                 if (userX != null)
                 {

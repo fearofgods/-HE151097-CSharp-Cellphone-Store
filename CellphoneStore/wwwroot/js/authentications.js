@@ -47,11 +47,14 @@
                 Password: $('input[name=login-password]').val()
             },
             success: function (response) {
-                //console.log(response.content);
                 if (response != null && response != undefined) {
                     //let result = JSON.parse(response);
                     if (response.status === 'Success') {
-                        window.location = '/Home/Index';
+                        if (response.isAdmin === "true") {
+                            window.location = '/Admin/Dashboard';
+                        } else {
+                            window.location = '/Home/Index';
+                        }
                     } else if (response.status === 'Fail') {
                         $('#login-message').html(response.content).css('color', 'red');
                     }

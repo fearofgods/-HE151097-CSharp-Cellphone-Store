@@ -1,0 +1,117 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Add New";
+}
+
+@using CellphoneStore.Models
+@model List<Category>
+
+<div class="container">
+    <div class="alert alert-primary" id="myAlert" role="alert">
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Thêm sản phẩm mới</h1>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#main-info">Thông tin cơ bản</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#system-info">Thông tin cấu hình</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#color-info">Màu sản phẩm</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#storage-info">Bộ nhớ sản phẩm</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link save" id="save" href="#">Lưu</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane container active" id="main-info">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="cid">Danh mục sản phẩm</label><br>
+                            <select name="cid" id="cid">
+                                @foreach (var item in Model)
+                                {
+                                    <option value="@item.Cid">@item.Cname</option>
+                                }
+                            </select><br>
+                            <label for="pid">Mã sản phẩm</label><br>
+                            <input type="text" id="pid" name="pid" /><br>
+                            <label for="pname">Tên sản phẩm</label><br>
+                            <input type="text" id="pname" name="pname" /><br>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="image">Ảnh sản phẩm</label><br>
+                            <input type="text" id="image" name="image"><br>
+                            <label for="price">Giá sản phẩm</label><br>
+                            <input type="number" min="0" id="price" name="price" placeholder="Chỉ nhập số"><br>
+                            <label for="amount">Số lượng</label><br>
+                            <input type="number" min="0" name="amount" id="amount" placeholder="Chỉ nhập số"><br>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="des">Mô tả</label><br>
+                            <textarea name="des" id="description"></textarea><br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane container fade" id="system-info">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="screen">Màn hình</label><br>
+                            <input type="text" name="screen" id="screen"><br>
+                            <label for="os">Hệ điều hành</label><br>
+                            <input type="text" name="os" id="os"><br>
+                            <label for="rearcam">Camera sau</label><br>
+                            <input type="text" name="rearcam" id="rearcam"><br>
+                            <label for="frontcam">Camera trước</label><br>
+                            <input type="text" name="frontcam" id="frontcam"><br>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="soc">CPU</label><br>
+                            <input type="text" name="soc" id="soc"><br>
+                            <label for="ram">Ram</label><br>
+                            <input type="text" name="ram" id="ram"><br>
+                            <label for="sim">Sim</label><br>
+                            <input type="text" name="sim" id="sim"><br>
+                            <label for="battery">Pin</label><br>
+                            <input type="text" name="battery" id="battery"><br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane container fade" id="color-info">
+                    <a href="#" id="color-add"><i class="fa-solid fa-circle-plus"></i>&nbsp;Thêm lựa chọn màu</a>
+                    <div id="color-content"></div>
+                </div>
+
+                <div class="tab-pane container fade" id="storage-info">
+                    <a href="#" id="storage-add"><i class="fa-solid fa-circle-plus"></i>&nbsp;Thêm lựa chọn bộ nhớ</a>
+                    <div id="storage-content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles{
+<link rel="stylesheet" href="~/js/summernote/summernote-bs4.min.css">
+<link rel="stylesheet" href="~/css/addnew.css">
+}
+
+@section Scripts{
+<script src="~/js/summernote/summernote-bs4.js"></script>
+<script src="~/js/addnew.js"></script>
+}

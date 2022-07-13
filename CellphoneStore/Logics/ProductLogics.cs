@@ -126,5 +126,76 @@ namespace CellphoneStore.Logics
         {
             return context.Products.Where(x => x.Pid.Equals(pid)).FirstOrDefault();
         }
+
+        //Add new product
+
+        public void AddNewProduct(Product product)
+        {
+            context.Add(product);
+            context.SaveChanges();
+        }
+
+        public void AddProductDetails(ProductDetail productDetail)
+        {
+            context.Add(productDetail);
+            context.SaveChanges();
+        }
+
+        public void AddColorDetails(List<string> colors, string pid)
+        {
+            List<ColorDetail> colorsList = new List<ColorDetail>();
+            foreach (string color in colors)
+            {
+                colorsList.Add(new ColorDetail { Pid = pid, Color = color });
+            };
+            context.AddRange(colorsList);
+            context.SaveChanges();
+        }
+
+        public void AddStorageDetails(List<string> storages, string pid)
+        {
+            List<StorageDetail> storageDetails = new List<StorageDetail>();
+            foreach (string storage in storages)
+            {
+                storageDetails.Add(new StorageDetail { Pid = pid, Storage = storage });
+            };
+            context.AddRange(storageDetails);
+            context.SaveChanges();
+        }
+
+        //Remove product
+        public int RemoveProduct(string pid)
+        {
+            Product product = context.Products.Where(x => x.Pid.Equals(pid)).FirstOrDefault();
+            ProductDetail productDetail = context.ProductDetails.Where(x => x.Pid.Equals(pid)).FirstOrDefault();
+            List<StorageDetail> storageDetail = context.StorageDetails.Where(x => x.Pid.Equals(pid)).ToList();
+            List<ColorDetail> colorDetail = context.ColorDetails.Where(x => x.Pid.Equals(pid)).ToList();
+            try
+            {
+                if (productDetail != null)
+                {
+                    context.ProductDetails.Remove(productDetail);
+                }
+
+                if(storageDetail != null && storageDetail.Count > 0)
+                {
+                    context.StorageDetails.RemoveRange(storageDetail);
+                }
+
+                if (colorDetail != null && colorDetail.Count >0)
+                {
+                    context.ColorDetails.RemoveRange(colorDetail);
+                }
+                context.Products.Remove(product);
+                context.SaveChanges();
+                return 1;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return 0;
+            }
+            
+        }
     }
 }
