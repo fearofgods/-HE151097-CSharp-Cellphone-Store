@@ -65,7 +65,7 @@
                             <td>@item.Pid</td>
                             <td>@item.Price.ToString("C",CultureInfo.CreateSpecificCulture("vn-VN")).Substring(1).Replace(",",".")đ</td>
                             <td>@item.Amount</td>
-                            <td><a href="#">Xem chi tiết</a>&nbsp;|&nbsp;<a href="#" onclick="openModal('@item.Pid')">Xóa</a></td>
+                            <td><a href="/Admin/ProductDetails/@item.Pid">Xem chi tiết</a>&nbsp;|&nbsp;<a href="#" onclick="openModal('@item.Pid')">Xóa</a></td>
                         </tr>
                     }
                 </tbody>

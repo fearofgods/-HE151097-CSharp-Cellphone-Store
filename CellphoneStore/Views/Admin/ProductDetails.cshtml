@@ -1,0 +1,159 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Product Details";
+    ProductDetail productDetails = (ProductDetail)ViewData["ProductDetail"];
+    Product product = (Product)ViewData["Product"];
+    List<ColorDetail> colors = (List<ColorDetail>)ViewData["Colors"];
+    List<StorageDetail> storages = (List<StorageDetail>)ViewData["Storages"];
+}
+
+@using CellphoneStore.Models
+@model List<Category>
+
+<div class="container">
+    <div class="alert alert-primary" id="myAlert" role="alert">
+    </div>
+
+    <div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="checkModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="bodyContent">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button id="confirmAction" type="button" class="btn btn-primary">Đồng ý</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Thông tin sản phẩm</h1>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#main-info">Thông tin cơ bản</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#system-info">Thông tin cấu hình</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#color-info">Màu sản phẩm</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#storage-info">Bộ nhớ sản phẩm</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link save" id="save-changes" href="#">Lưu</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane container active" id="main-info">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="cid">Danh mục sản phẩm</label><br>
+                            <select name="cid" id="cid">
+                                @foreach (var itemx in Model)
+                                {
+                                    <!option value="@itemx.Cid" @(itemx.Cid == product.Cid?"selected":"")>@itemx.Cname</!option>
+                                }
+                            </select><br>
+                            <label for="pid">Mã sản phẩm</label><br>
+                            <input type="text" id="pid" name="pid" value="@product.Pid" readonly/><br>
+                            <label for="pname">Tên sản phẩm</label><br>
+                            <input type="text" id="pname" name="pname" value="@product.Name" /><br>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="image">Ảnh sản phẩm</label><br>
+                            <input type="text" id="image" name="image" value="@product.Image"><br>
+                            <label for="price">Giá sản phẩm</label><br>
+                            <input type="number" min="0" id="price" name="price" placeholder="Chỉ nhập số" value="@product.Price"><br>
+                            <label for="amount">Số lượng</label><br>
+                            <input type="number" min="0" name="amount" id="amount" placeholder="Chỉ nhập số" value="@product.Amount"><br>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="des">Mô tả</label><br>
+                            <textarea name="des" id="description">@product.Description</textarea><br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane container fade" id="system-info">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="screen">Màn hình</label><br>
+                            <input type="text" name="screen" id="screen" value="@productDetails.Screen"><br>
+                            <label for="os">Hệ điều hành</label><br>
+                            <input type="text" name="os" id="os" value="@productDetails.Os"><br>
+                            <label for="rearcam">Camera sau</label><br>
+                            <input type="text" name="rearcam" id="rearcam" value="@productDetails.Rearcam"><br>
+                            <label for="frontcam">Camera trước</label><br>
+                            <input type="text" name="frontcam" id="frontcam" value="@productDetails.Frontcam"><br>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="soc">CPU</label><br>
+                            <input type="text" name="soc" id="soc" value="@productDetails.Soc"><br>
+                            <label for="ram">Ram</label><br>
+                            <input type="text" name="ram" id="ram" value="@productDetails.Ram"><br>
+                            <label for="sim">Sim</label><br>
+                            <input type="text" name="sim" id="sim" value="@productDetails.Sim"><br>
+                            <label for="battery">Pin</label><br>
+                            <input type="text" name="battery" id="battery" value="@productDetails.Battery"><br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane container fade" id="color-info">
+                    <a href="#" id="color-add"><i class="fa-solid fa-circle-plus"></i>&nbsp;Thêm lựa chọn màu</a>
+                    <div id="color-content">
+                        @foreach (var item in colors)
+                        {
+                            <div class="color-items color-current">
+                                <input class="color-id" type="hidden" value="@item.Id" />
+                                <input class="color-input color-old" type="text" value="@item.Color" />
+                                <input class="delete-color" type="button" value="Xóa" />
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="tab-pane container fade" id="storage-info">
+                    <a href="#" id="storage-add"><i class="fa-solid fa-circle-plus"></i>&nbsp;Thêm lựa chọn bộ nhớ</a>
+                    <div id="storage-content">
+                        @foreach (var item in storages)
+                        {
+                            <div class="storage-items storage-current">
+                                <input class="storage-id" type="hidden" value="@item.Id" />
+                                <input class="storage-input storage-old" type="text" value="@item.Storage" />
+                                <input class="delete-storage" type="button" value="Xóa" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles{
+<link rel="stylesheet" href="~/js/summernote/summernote-bs4.min.css">
+<link rel="stylesheet" href="~/css/addnew.css">
+}
+
+@section Scripts{
+<script src="~/js/summernote/summernote-bs4.js"></script>
+<script src="~/js/addnew.js"></script>
+}

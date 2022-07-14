@@ -163,6 +163,96 @@ namespace CellphoneStore.Logics
             context.SaveChanges();
         }
 
+        //Update product
+        public int UpdateProduct(Product product)
+        {
+            Product p = context.Products.FirstOrDefault(x => x.Pid == product.Pid);
+            try
+            {
+                p.Cid = product.Cid;
+                p.Name = product.Name;
+                p.Image = product.Image;
+                p.Price = product.Price;
+                p.Description = product.Description;
+                p.Amount = product.Amount;
+                //context.Update(product);
+                context.SaveChanges();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
+
+        public int UpdateProductDetails(ProductDetail productDetail)
+        {
+            ProductDetail pd = context.ProductDetails.FirstOrDefault(x => x.Pid == productDetail.Pid);
+            try
+            {
+                pd.Screen = productDetail.Screen;
+                pd.Os = productDetail.Os;
+                pd.Rearcam = productDetail.Rearcam;
+                pd.Frontcam = productDetail.Frontcam;
+                pd.Soc = productDetail.Soc;
+                pd.Ram = productDetail.Ram;
+                pd.Sim = productDetail.Sim;
+                pd.Battery = productDetail.Battery;
+                //context.Update(productDetail);
+                context.SaveChanges();
+                return 1;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
+
+        public int UpdateColorDetails(List<ColorDetail> colorDetails)
+        {
+            try
+            {
+                foreach (ColorDetail colorDetail in colorDetails)
+                {
+                    ColorDetail pd = context.ColorDetails.Where(x => x.Id == colorDetail.Id && x.Pid == colorDetail.Pid).FirstOrDefault();
+                    context.Remove(pd);
+                    context.ColorDetails.Add(colorDetail);
+                }
+                //context.UpdateRange(colorDetails);
+                context.SaveChanges();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
+
+        public int UpdateStorageDetails(List<StorageDetail> storageDetails)
+        {
+            try
+            {
+                foreach (StorageDetail storageDetail in storageDetails)
+                {
+                    StorageDetail sd = context.StorageDetails.Where(x => x.Id == storageDetail.Id && x.Pid == storageDetail.Pid).FirstOrDefault();
+                    context.Remove(sd);
+                    context.StorageDetails.Add(storageDetail);
+                }
+                //context.UpdateRange(storageDetails);
+                context.SaveChanges();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return 0;
+            }
+        }
+
         //Remove product
         public int RemoveProduct(string pid)
         {
@@ -177,12 +267,12 @@ namespace CellphoneStore.Logics
                     context.ProductDetails.Remove(productDetail);
                 }
 
-                if(storageDetail != null && storageDetail.Count > 0)
+                if (storageDetail != null && storageDetail.Count > 0)
                 {
                     context.StorageDetails.RemoveRange(storageDetail);
                 }
 
-                if (colorDetail != null && colorDetail.Count >0)
+                if (colorDetail != null && colorDetail.Count > 0)
                 {
                     context.ColorDetails.RemoveRange(colorDetail);
                 }
@@ -195,7 +285,38 @@ namespace CellphoneStore.Logics
                 Console.WriteLine(e);
                 return 0;
             }
-            
+
         }
+
+        public int RemoveColor(int id)
+        {
+            ColorDetail color = context.ColorDetails.Where(x => x.Id == id).FirstOrDefault();
+            try
+            {
+                context.ColorDetails.Remove(color);
+                context.SaveChanges();
+                return 1;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
+
+        public int RemoveStorage(int id)
+        {
+            StorageDetail storage = context.StorageDetails.Where(x => x.Id == id).FirstOrDefault();
+            try
+            {
+                context.StorageDetails.Remove(storage);
+                context.SaveChanges();
+                return 1;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
+
     }
 }

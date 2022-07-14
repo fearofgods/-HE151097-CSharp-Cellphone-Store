@@ -27,7 +27,6 @@ function openModal(pid) {
                     $('#bodyContent').html(`Bạn đã xóa thành công ${pid}`);
                     closeModal();
                 } else {
-                    location.reload = "/Admin/ProductManage";
                     $('.modal-footer').css("display", "none");
                     $('#checkModal').modal('show');
                     $('#checkModalLabel').html(`Thất bại`);
