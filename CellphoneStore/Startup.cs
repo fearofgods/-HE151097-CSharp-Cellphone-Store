@@ -50,7 +50,7 @@ namespace CellphoneStore
             app.UseSession();
 
             app.UseMiddleware<CheckAccessMiddleware>();
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

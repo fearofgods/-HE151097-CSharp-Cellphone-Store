@@ -1,0 +1,76 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "User Manage";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Birthday</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Phạm</td>
+                    <td>Hồng Dương</td>
+                    <td>hongduong5441@gmail.com</td>
+                    <td>0839169667</td>
+                    <td>Hải Dương</td>
+                    <td>16/11/2001</td>
+                    <td>admin</td>
+                    <td>admin</td>
+                    <td>admin</td>
+                    <td><a href="#">Cập nhật</a></td>
+                </tr>
+                <tr>
+                    <td><input type="text" value="" placeholder="Họ"/></td>
+                    <td><input type="text" value="" placeholder="Tên"/></td>
+                    <td><input type="text" value="" placeholder="Email"/></td>
+                    <td><input type="text" value="" placeholder="Phone"/></td>
+                    <td><input type="text" value="" placeholder="Address"/></td>
+                    <td><input type="date" value="2001/11/16"/></td>
+                    <td><input type="text" value="" placeholder="Username"/></td>
+                    <td><input type="password" value="" placeholder="Pasword"/></td>
+                    <td>
+                        <select>
+                            <option value="sa">Super Admin</option>
+                            <option value="us">User</option>
+                            <option value="bl">Block</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>twitter</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+
+
+@section Styles{
+
+}
+
+@section Scripts{
+
+}

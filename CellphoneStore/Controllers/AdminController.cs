@@ -40,6 +40,34 @@ namespace CellphoneStore.Controllers
 
             return View(products);
         }
+
+        [HttpPost]
+        public IActionResult GetTopSellProduct(int take)
+        {
+            ProductLogics productLogics = new ProductLogics();
+
+            dynamic products = productLogics.BestSellProduct(take);
+
+            return Json(products);
+        }
+
+        [HttpPost]
+        public IActionResult GetTopValueOrders(int take)
+        {
+            ProductLogics productLogics = new ProductLogics();
+
+            List<Order> orders = productLogics.GetTopValueOrder(5);
+
+            return Json(orders);
+        }
+
+        public IActionResult UsersManage()
+        {
+            UserLogics userLogics = new UserLogics();
+            List<User> users = userLogics.GetAll();
+            return View(users);
+        }
+
         [HttpGet]
         public IActionResult AddNewProduct()
         {

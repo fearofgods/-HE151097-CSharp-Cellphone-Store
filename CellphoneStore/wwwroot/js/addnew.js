@@ -46,7 +46,7 @@
     $('#description').summernote({
         placeholder: 'Mô tả sản phẩm',
         tabsize: 2,
-        height: 100,
+        height: 1000,
         width: 955
     });
 
@@ -68,7 +68,7 @@
         let image = $('input[name=image]').val().trim();
         let price = $('input[name=price]').val().trim();
         let amount = $('input[name=amount]').val().trim();
-        let description = $('textarea[name=des]').val().trim();
+        let description = $('#description').summernote('code');
         //Thông tin cấu hình
         let screen = $('input[name=screen]').val().trim();
         let os = $('input[name=os]').val().trim();
@@ -80,32 +80,45 @@
         let battery = $('input[name=battery]').val().trim();
 
 
-        $.ajax({
-            type: "post",
-            url: "/Admin/AddNewProduct",
-            data: {
-                Pid: pid,
-                Cid: cid,
-                Name: name,
-                Image: image,
-                Price: price,
-                Description: description,
-                Amount: amount,
-                Screen: screen,
-                Os: os,
-                Rearcam: rearcam,
-                Frontcam: frontcam,
-                Soc: soc,
-                Ram: ram,
-                Sim: sim,
-                Battery: battery,
-                colors: JSON.stringify(colorData),
-                storages: JSON.stringify(storageData)
-            },
-            success: function (response) {
-                console.log(response);
-            }
+        $('#checkModal').modal('show');
+        $('#checkModalLabel').html(`Thêm mới!`);
+        $('#bodyContent').html(`Bạn có muốn muốn tạo?`);
+        $('#confirmAction').click(function () {
+            $.ajax({
+                type: "post",
+                url: "/Admin/AddNewProduct",
+                data: {
+                    Pid: pid,
+                    Cid: cid,
+                    Name: name,
+                    Image: image,
+                    Price: price,
+                    Description: description,
+                    Amount: amount,
+                    Screen: screen,
+                    Os: os,
+                    Rearcam: rearcam,
+                    Frontcam: frontcam,
+                    Soc: soc,
+                    Ram: ram,
+                    Sim: sim,
+                    Battery: battery,
+                    colors: JSON.stringify(colorData),
+                    storages: JSON.stringify(storageData)
+                },
+                success: function (response) {
+                    $('#checkModal').modal('hide');
+                    if (response.status === "Success") {
+                        showAlert(response.content);
+                        parent.remove();
+                    } else {
+                        showAlert(response.content);
+                    };
+                }
+            });
         });
+
+
     });
 
     $('#save-changes').click(function () {
@@ -117,7 +130,7 @@
         let image = $('input[name=image]').val().trim();
         let price = $('input[name=price]').val().trim();
         let amount = $('input[name=amount]').val().trim();
-        let description = $('textarea[name=des]').val().trim();
+        let description = $('#description').summernote('code');
         //Thông tin cấu hình
         let screen = $('input[name=screen]').val().trim();
         let os = $('input[name=os]').val().trim();

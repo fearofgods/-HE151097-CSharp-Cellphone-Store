@@ -15,6 +15,11 @@ namespace CellphoneStore.Logics
             context = new WebContext();
         }
 
+        public List<User> GetAll()
+        {
+            return context.Users.ToList();
+        }
+
         public User Login(string user, string pass)
         {
             return context.Users.Where(x => x.Username.Equals(user) && x.Password.Equals(pass)).FirstOrDefault();
@@ -59,5 +64,7 @@ namespace CellphoneStore.Logics
         {
             return context.Users.Where(x => x.Username.Equals(userName)).FirstOrDefault();
         }
+
+
     }
 }

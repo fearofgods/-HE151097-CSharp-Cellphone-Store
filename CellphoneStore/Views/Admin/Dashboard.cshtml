@@ -10,27 +10,24 @@
         <div class="col-md-12">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#home">Doanh thu</a>
+                    <a class="nav-link active topsell" data-toggle="tab" href="#menu1">Top bán chạy</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu1">Top bán chạy</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu2">Tổng đơn hàng</a>
+                    <a class="nav-link highorders" data-toggle="tab" href="#menu2">Tổng đơn hàng</a>
                 </li>
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div class="tab-pane container active" id="home">
-                    <canvas id="myChart"></canvas>
+                <div class="tab-pane container-fluid active" id="menu1">
+                    <div class="col-md-12">
+                        <div id="linechart_topsell" class="chart"></div>
+                    </div>
                 </div>
-                <div class="tab-pane container fade" id="menu1">
-                    <canvas id="myChart2"></canvas>
-                </div>
-                <div class="tab-pane container fade" id="menu2">
-                    <a>Click</a>
-                    <a>Click2</a>
+                <div class="tab-pane container-fluid fade" id="menu2">
+                    <div class="col-md-12">
+                        <div id="linechart_highestorder" class="chart"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,7 +36,9 @@
 </div>
 
 
+
 @section Scripts {
+<script src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="~/js/dashboard.js"></script>
 }
 

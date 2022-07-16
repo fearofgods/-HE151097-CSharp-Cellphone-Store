@@ -10,21 +10,22 @@
     $.ajax({
         type: "post",
         url: "/Home/TopSell",
+        data: {
+            take:10
+        },
         success: function (response) {
-
-            let object = JSON.parse(response);
-            console.log(object);
+            console.log(response);
             let content = "";
 
-            for (let item in object) {
+            for (let item in response) {
                 content += `<div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="item-top">
                                             <div class="item-top-img">
-                                                <a href="/Details/ProductDetails/${object[item].Pid}"><img src="${object[item].Image}" alt="${object[item].Name}"></a>
+                                                <a href="/Details/ProductDetails/${response[item].pid}"><img src="${response[item].image}" alt="${response[item].name}"></a>
                                             </div>
                                             <div class="item-top-title">
-                                                <h2>${object[item].Name}</h2>
-                                                <p>${convertCurrency(object[item].Price)}</p>
+                                                <h2>${response[item].name}</h2>
+                                                <p>${convertCurrency(response[item].price)}</p>
                                             </div>
                                         </div>
                                     </div>`

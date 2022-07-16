@@ -29,7 +29,12 @@ namespace CellphoneStore.Logics
             return context.Products.OrderByDescending(x => x.Id).Skip(skip).Take(4).ToList();
         }
 
-        public List<Product> BestSellProduct()
+        public List<Order> GetTopValueOrder(int take)
+        {
+            return context.Orders.OrderByDescending(x => x.Total).Take(take).ToList();
+        }
+
+        public dynamic BestSellProduct(int take)
         {
             return context.Products.Join(context.OrderDetails, pro => pro.Pid, od => od.Pid, (pro, od) => new { pro, od }).GroupBy(x => new
             {
@@ -39,10 +44,8 @@ namespace CellphoneStore.Logics
                 x.pro.Name,
                 x.pro.Image,
                 x.pro.Price,
-                x.pro.Description,
-                x.pro.Amount,
-
-            }).OrderByDescending(x => x.Sum(y => y.od.Quantity)).Select(x => new Product
+                x.pro.Description
+            }).OrderByDescending(x => x.Sum(y => y.od.Quantity)).Select(x => new
             {
                 Id = x.Key.Id,
                 Pid = x.Key.Pid,
@@ -51,10 +54,9 @@ namespace CellphoneStore.Logics
                 Image = x.Key.Image,
                 Price = x.Key.Price,
                 Description = x.Key.Description,
-                Amount = x.Key.Amount
+                Count = x.Sum(x=>x.od.Quantity)
 
-
-            }).Take(4).ToList();
+            }).Take(take).ToList();
         }
 
         public int CountAllProducts(int cateId)
@@ -218,8 +220,7 @@ namespace CellphoneStore.Logics
                 foreach (ColorDetail colorDetail in colorDetails)
                 {
                     ColorDetail pd = context.ColorDetails.Where(x => x.Id == colorDetail.Id && x.Pid == colorDetail.Pid).FirstOrDefault();
-                    context.Remove(pd);
-                    context.ColorDetails.Add(colorDetail);
+                    pd.Color = colorDetail.Color;
                 }
                 //context.UpdateRange(colorDetails);
                 context.SaveChanges();
@@ -239,8 +240,7 @@ namespace CellphoneStore.Logics
                 foreach (StorageDetail storageDetail in storageDetails)
                 {
                     StorageDetail sd = context.StorageDetails.Where(x => x.Id == storageDetail.Id && x.Pid == storageDetail.Pid).FirstOrDefault();
-                    context.Remove(sd);
-                    context.StorageDetails.Add(storageDetail);
+                    sd.Storage = storageDetail.Storage;
                 }
                 //context.UpdateRange(storageDetails);
                 context.SaveChanges();

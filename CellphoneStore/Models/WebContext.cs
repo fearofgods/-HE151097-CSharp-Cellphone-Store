@@ -57,8 +57,11 @@ namespace CellphoneStore.Models
 
             modelBuilder.Entity<ColorDetail>(entity =>
             {
-                entity.HasKey(e => new { e.Pid, e.Color })
-                    .HasName("PK__ColorDet__443705741A19ABC1");
+                entity.HasKey(e => new { e.Id, e.Pid });
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("id");
 
                 entity.Property(e => e.Pid)
                     .HasMaxLength(20)
@@ -66,18 +69,15 @@ namespace CellphoneStore.Models
                     .HasColumnName("pid");
 
                 entity.Property(e => e.Color)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .HasColumnName("color");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("id");
 
                 entity.HasOne(d => d.PidNavigation)
                     .WithMany(p => p.ColorDetails)
                     .HasForeignKey(d => d.Pid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ColorDetails_Products");
+                    .HasConstraintName("FK_ColorDetails_Products1");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -245,8 +245,11 @@ namespace CellphoneStore.Models
 
             modelBuilder.Entity<StorageDetail>(entity =>
             {
-                entity.HasKey(e => new { e.Pid, e.Storage })
-                    .HasName("PK__StorageD__CC6124071115EC30");
+                entity.HasKey(e => new { e.Id, e.Pid });
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("id");
 
                 entity.Property(e => e.Pid)
                     .HasMaxLength(20)
@@ -254,18 +257,15 @@ namespace CellphoneStore.Models
                     .HasColumnName("pid");
 
                 entity.Property(e => e.Storage)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .HasColumnName("storage");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("id");
 
                 entity.HasOne(d => d.PidNavigation)
                     .WithMany(p => p.StorageDetails)
                     .HasForeignKey(d => d.Pid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_StorageDetails_Products");
+                    .HasConstraintName("FK_StorageDetails_Products1");
             });
 
             modelBuilder.Entity<User>(entity =>

@@ -48,12 +48,11 @@ namespace CellphoneStore.Controllers
         }
 
         [HttpPost]
-        public string TopSell()
+        public IActionResult TopSell(int take)
         {
             ProductLogics productLogics = new ProductLogics();
-            List<Product> test = productLogics.BestSellProduct();
-            string json = JsonConvert.SerializeObject(test);
-            return json;
+            dynamic test = productLogics.BestSellProduct(take);
+            return Json(test);
 
         }
         public IActionResult Privacy()
