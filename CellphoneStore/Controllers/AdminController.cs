@@ -56,15 +56,40 @@ namespace CellphoneStore.Controllers
         {
             ProductLogics productLogics = new ProductLogics();
 
-            List<Order> orders = productLogics.GetTopValueOrder(5);
+            List<Order> orders = productLogics.GetTopValueOrder(take);
 
             return Json(orders);
         }
 
         public IActionResult UsersManage()
         {
+            int paging = Convert.ToInt32(config.GetSection("PageSettings")["UserManage"]);
             UserLogics userLogics = new UserLogics();
-            List<User> users = userLogics.GetAll();
+
+            string uname = "";
+            if (!string.IsNullOrEmpty(HttpContext.Request.Query["searchId"]))
+            {
+                uname = HttpContext.Request.Query["searchId"];
+            }
+
+            int value = 0;
+            if (!string.IsNullOrEmpty(HttpContext.Request.Query["index"]))
+            {
+                value = Convert.ToInt32(HttpContext.Request.Query["index"]);
+            }
+
+            List<User> users = userLogics.GetUserPaging(value, uname);
+            int totalUsers = userLogics.CountUser(uname);
+            int totalPage = totalUsers / paging;
+            if (totalUsers % paging != 0)
+            {
+                totalPage++;
+            }
+
+            ViewData["TotalPage"] = totalPage;
+            ViewData["CurrentPage"] = value;
+            ViewData["SearchValue"] = uname;
+
             return View(users);
         }
 
@@ -89,7 +114,8 @@ namespace CellphoneStore.Controllers
             productLogics.AddColorDetails(color, product.Pid);
             productLogics.AddStorageDetails(storage, product.Pid);
 
-            return Json(new {
+            return Json(new
+            {
                 Status = "Success",
                 Content = "Thêm thành công!",
             });
@@ -115,7 +141,7 @@ namespace CellphoneStore.Controllers
                     Content = "Xóa thất bại!",
                 });
             }
-            
+
         }
 
         public IActionResult ProductDetails(string id)
@@ -145,7 +171,7 @@ namespace CellphoneStore.Controllers
             int status = productLogics.RemoveColor(id);
             if (status == 1)
             {
-                return Json(new {Status = "Success", Content= "Xóa thành công!"});
+                return Json(new { Status = "Success", Content = "Xóa thành công!" });
             }
             else
             {
@@ -192,7 +218,7 @@ namespace CellphoneStore.Controllers
                 productLogics.AddColorDetails(color, product.Pid);
             }
 
-            if (storage != null && storage.Count >0)
+            if (storage != null && storage.Count > 0)
             {
                 productLogics.AddStorageDetails(storage, product.Pid);
             }
@@ -205,6 +231,45 @@ namespace CellphoneStore.Controllers
             {
                 return Json(new { Status = "Fail", Content = "Cập nhật thất bại!" });
             }
+
+        }
+
+        [HttpPost]
+        public IActionResult UpdateUser(User user)
+        {
+            UserLogics userLogics = new UserLogics();
+            User userX = userLogics.GetUserData(user.Username);
+            if (!userX.Role.Equals("sa"))
+            {
+                int status = userLogics.UpdateRole(user);
+                if (status == 0)
+                {
+                    return Json(new
+                    {
+                        Status = "Success",
+                        Content = "Cập nhật thành công!"
+                    });
+
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        Status = "Fail",
+                        Content = "Cập nhật thất bại!"
+                    });
+
+                }
+            }
+            else
+            {
+                return Json(new
+                {
+                    Status = "Fail",
+                    Content = "Không thể thay đổi quyền admin!"
+                });
+            }
+            
 
         }
     }

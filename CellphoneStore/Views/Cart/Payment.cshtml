@@ -1,0 +1,85 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string json = Context.Session.GetString("user");
+    User userX = null;
+    if (!string.IsNullOrEmpty(json))
+    {
+        userX = JsonConvert.DeserializeObject<User>(json);
+    }
+    string size = (string)ViewData["CartSize"];
+}
+
+@using CellphoneStore.Models
+@using System.Globalization
+@model Cart
+
+<div class="row">
+    <form action="/Cart/ConfirmPayment" method="post" class="form">
+        <div class="col-md-12 dilivery-info">
+            <h2>Thông tin vận chuyển</h2>
+            <p>Họ và tên: @userX.Firstname @userX.Lastname</p>
+            <p>Địa chỉ: @userX.Address</p>
+            <p>Số điện thoại: @userX.Phone</p>
+            <p>Ghi chú: </p>
+            <textarea name="description" id="des"></textarea>
+        </div>
+
+
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col" colspan="2">Sản phẩm</th>
+                    <th scope="col">Phân loại</th>
+                    <th scope="col">Đơn giá</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col" colspan="2  ">Số tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int id = 1;
+                }
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td scope="row">@(id++)</td>
+                        <td><img id="img-items" src="@(item.products.Image)" class="img-responsive" alt=""></td>
+                        <td>&nbsp;@(item.products.Name) </td>
+                        <td>@(item.colorDetail.Color) - @(item.storageDetail.Storage)</td>
+                        <td id="item-price" class="i-price">@(item.products.Price.ToString("C",CultureInfo.CreateSpecificCulture("vn-VN")).Substring(1).Replace(",","."))đ</td>
+                        <td>
+                            <div>
+                                <input type="hidden" value="@item.products.Id" name="pid">
+                                <input type="hidden" value="@item.colorDetail.Id" name="cid">
+                                <input type="hidden" value="@item.storageDetail.Id" name="sid">
+                                <input type="text" value="@item.quantity" name="qty" class="qty-in" readonly>
+                            </div>
+                        </td>
+                        <td id="total-item-price" class="i-price">@((item.products.Price * item.quantity).ToString("C",CultureInfo.CreateSpecificCulture("vn-VN")).Substring(1).Replace(",","."))đ</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="payment">
+            <div class="price">
+                <span class="price-title">Tổng giá: </span><span class="price-total">@(Model.GetTotalMoney().ToString("C",CultureInfo.CreateSpecificCulture("vn-VN")).Substring(1).Replace(",","."))đ</span>
+            </div>
+            <div class="confirm"><button id="submit">Xác nhận</button></div>
+        </div>
+
+    </form>
+</div>
+
+@section Styles{
+<link rel="stylesheet" href="~/css/cart.css">
+}
+

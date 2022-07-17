@@ -4,12 +4,12 @@ $(document).ready(function () {
     google.charts.load('current', {
         'packages': ['corechart', 'bar']
     }).then(() => {
-        getTopSellData(10);
+        getTopSellData(5);
 
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             let target = $(e.target);
             if (target.hasClass('topsell')) {
-                getTopSellData(10);
+                getTopSellData(5);
             } else if (target.hasClass('highorders')){
                 getTopHighestOrder(5);
             }
@@ -53,7 +53,7 @@ $(document).ready(function () {
         for (item in result) {
             arr.push([result[item].name, result[item].count]);
         }
-
+        
         let data = google.visualization.arrayToDataTable(arr);
 
         var view = new google.visualization.DataView(data);

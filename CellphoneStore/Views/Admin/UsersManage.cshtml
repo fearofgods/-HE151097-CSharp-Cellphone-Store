@@ -4,73 +4,118 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewData["Title"] = "User Manage";
+
+    int currentPage = (int)ViewData["CurrentPage"];
+    int totalPage = (int)ViewData["TotalPage"];
+    string uname = (string)ViewData["SearchValue"];
 }
 
+@using CellphoneStore.Models
+@model List<User>
+
 <div class="container-fluid">
+    <div class="alert alert-primary" id="myAlert" role="alert">
+    </div>
+
+    <div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="checkModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="bodyContent">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button id="confirmAction" type="button" class="btn btn-primary">Đồng ý</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
+            <h1>Danh sách người dùng</h1>
+            <div class="col-md-12 search">
+                <form action="/Admin/UsersManage" method="get">
+                    <input type="search" name="searchId" value="@(uname!=null?uname:"")" placeholder="Search user name here!" />
+                    <button>Search</button>
+                </form>
+            </div>
             <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Birthday</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Password</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Phạm</td>
-                    <td>Hồng Dương</td>
-                    <td>hongduong5441@gmail.com</td>
-                    <td>0839169667</td>
-                    <td>Hải Dương</td>
-                    <td>16/11/2001</td>
-                    <td>admin</td>
-                    <td>admin</td>
-                    <td>admin</td>
-                    <td><a href="#">Cập nhật</a></td>
-                </tr>
-                <tr>
-                    <td><input type="text" value="" placeholder="Họ"/></td>
-                    <td><input type="text" value="" placeholder="Tên"/></td>
-                    <td><input type="text" value="" placeholder="Email"/></td>
-                    <td><input type="text" value="" placeholder="Phone"/></td>
-                    <td><input type="text" value="" placeholder="Address"/></td>
-                    <td><input type="date" value="2001/11/16"/></td>
-                    <td><input type="text" value="" placeholder="Username"/></td>
-                    <td><input type="password" value="" placeholder="Pasword"/></td>
-                    <td>
-                        <select>
-                            <option value="sa">Super Admin</option>
-                            <option value="us">User</option>
-                            <option value="bl">Block</option>
-                        </select>
-                    </td>
-
-                </tr>
-                <tr>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>twitter</td>
-                </tr>
-            </tbody>
-        </table>
+                <thead>
+                    <tr>
+                        <th scope="col">Họ</th>
+                        <th scope="col">Tên</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">SĐT</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Ngày sinh</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Quyền</th>
+                        <th scope="col">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><input type="text" value="@item.Firstname" placeholder="Họ" readonly /></td>
+                            <td><input class="short" type="text" value="@item.Lastname" placeholder="Tên" readonly /></td>
+                            <td><input type="text" value="@item.Email" placeholder="Email" readonly /></td>
+                            <td><input class="short" type="text" value="@item.Phone" placeholder="Phone" readonly /></td>
+                            <td><input type="text" value="@item.Address" placeholder="Address" readonly /></td>
+                            @{
+                                string birthday = String.Format("{0:yyyy/MM/dd}", item.Birthday);
+                            }
+                            <td><input type="date" value="@birthday" readonly /></td>
+                            <td><input name="username" class="short" type="text" value="@item.Username" placeholder="Username" readonly /></td>
+                            <td><input class="short" type="password" value="@item.Password" placeholder="Pasword" readonly /></td>
+                            <td>
+                                <select name="role" class="short">
+                                    <!option value="sa" @(item.Role.Equals("sa")?"selected":"")>Super Admin</!option>
+                                    <!option value="us" @(item.Role.Equals("us")?"selected":"")>User</!option>
+                                    <!option value="bl" @(item.Role.Equals("bl")?"selected":"")>Block</!option>
+                                </select>
+                            </td>
+                            <td><a class="update-btn"><i class="fa-solid fa-pen"></i>Cập nhật</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="paging">
+                @if (totalPage > 1)
+                {
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            <li class="page-item @(currentPage == 0 ? "disabled" : "")">
+                                <a class="page-link" href="@(currentPage == totalPage ? "" : $"/Admin/UsersManage?searchId={uname}&index={currentPage - 1}")" tabindex="-1"><i class="fa-solid fa-angles-left"></i></a>
+                            </li>
+                            @for (int i = 0; i < totalPage; i++)
+                            {
+                                <li class="page-item @(currentPage == i ? "active" : "") ">
+                                    <a class="page-link" href="/Admin/UsersManage?searchId=@uname&index=@i">@(i+1)</a>
+                                </li>
+                            }
+                            <li class="page-item @(currentPage == totalPage - 1 ? "disabled" : "")">
+                                <a class="page-link" href="@(currentPage == totalPage - 1 ? "" : $"/Admin/UsersManage?searchId={uname}&index={currentPage + 1}")"><i class="fa-solid fa-angles-right"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                }
+            </div>
         </div>
     </div>
 </div>
 
 
 @section Styles{
-
+<link rel="stylesheet" href="~/css/usermanage.css">
 }
 
 @section Scripts{
-
+<script src="~/js/usermanage.js"></script>
 }

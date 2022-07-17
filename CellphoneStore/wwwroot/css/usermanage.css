@@ -1,0 +1,44 @@
+﻿.short{
+    height:30px;
+    width:100px;
+}
+
+.paging {
+    display: flex;
+    justify-content: center;
+}
+
+.update-btn {
+    color: #007bff !important;
+    cursor: pointer;
+}
+
+    .update-btn:hover {
+        color: #00B2FF !important;
+    }
+
+.alert {
+    display: none;
+    position: fixed;
+    z-index: 5;
+    top: 90px;
+    right: 0px;
+}
+
+.search{
+    display:flex;
+    justify-content:center;
+    margin-bottom: 1rem;
+}
+
+input[name=searchId]{
+    width: 500px;
+    border: 1px solid black;
+}
+
+.search form button {
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: #fff;
+    border-radius:5px;
+}

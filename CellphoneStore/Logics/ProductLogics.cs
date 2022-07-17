@@ -107,6 +107,36 @@ namespace CellphoneStore.Logics
             return context.Products.Where(x => x.Name.Contains(search)).Skip(skip).Take(paging).ToList();
         }
 
+        public List<Product> GetAllProduct()
+        {
+            return context.Products.ToList();
+        }
+
+        public List<ColorDetail> GetAllColor()
+        {
+            return context.ColorDetails.ToList();
+        }
+
+        public List<StorageDetail> GetAllStorage()
+        {
+            return context.StorageDetails.ToList();
+        }
+
+        public Product GetProductById(int id)
+        {
+            return context.Products.Where(x => x.Id == id).FirstOrDefault();
+        }
+
+        public ColorDetail GetColorById(int cid)
+        {
+            return context.ColorDetails.FirstOrDefault(x => x.Id == cid);
+        }
+
+        public StorageDetail GetStorageById(int cid)
+        {
+            return context.StorageDetails.FirstOrDefault(x => x.Id == cid); 
+        }
+
         //Product details
 
         public ProductDetail GetProductDetail(string pid)

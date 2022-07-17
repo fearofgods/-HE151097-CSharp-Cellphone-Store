@@ -14,7 +14,6 @@
 @using CellphoneStore.Models
 @using System.Globalization
 
-
 <div class="row products-items">
     <div class=" col-lg-12 col-md-12 col-sm-12">
         <div class="title">
@@ -64,7 +63,9 @@
                     <p id="price-content">&nbsp;&nbsp;@product.Price.ToString("C",CultureInfo.CreateSpecificCulture("vn-VN")).Substring(1).Replace(",",".")đ</p>
                 </div>
                 <div class="btn">
-                    <a onclick="buy(${pd.id})"><input id="btn-1" type="button" value="Thêm vào giỏ" /></a>
+                    <div id="message"></div>
+                    <input type="hidden" value="@product.Id" id="productId"/>
+                    <a><input id="btn-1" type="button" value="Thêm vào giỏ" /></a>
                 </div>
             </form>
 

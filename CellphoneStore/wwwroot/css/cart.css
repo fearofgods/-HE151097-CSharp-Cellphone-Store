@@ -1,0 +1,191 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.content {
+    background-color: #343A40;
+    width: auto;
+    height: 550px;
+}
+
+h1 {
+    text-align: center;
+    /*padding-top: 200px;*/
+    color: #ffffff;
+}
+
+.table > tbody > tr > td, tr {
+    vertical-align: middle;
+    text-align: center;
+}
+
+    .table > tbody > tr > td > img {
+        width: 50%;
+        height: 50%;
+    }
+
+.qty-in {
+    width: 50px;
+    text-align: center;
+    border: none;
+    font-size: 18px;
+}
+
+.qty-btn {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+    .qty-btn:hover {
+        background-color: #888;
+        color: #ffffff;
+    }
+
+.img-items {
+    width: 50%;
+    height: 50%;
+}
+
+.payment {
+    display: flex;
+    background-color: #343a40;
+    padding-top: 10px;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.price {
+    float: left;
+    width: 50%;
+    text-align: center;
+    font-size: 22px;
+    color: #ffffff;
+    height: 50px;
+}
+
+    .price .price-total {
+        color: #D70018;
+    }
+
+.confirm {
+    text-align: center;
+    float: right;
+    width: 50%;
+}
+
+    .confirm button {
+        border: none;
+        border-radius: 1rem;
+        height: 30px;
+        outline: none;
+    }
+
+        .confirm button:hover {
+            background-color: #fed100;
+            color: black;
+        }
+
+.page-footer {
+    background-color: #343A40;
+    color: white;
+}
+
+.payment > button {
+    outline: none;
+    border: none;
+    border-radius: 1rem;
+    width: 100px;
+    height: 30px;
+}
+
+/* Bill CSS */
+
+
+.dilivery-info {
+    background-color: #343a40;
+    margin-bottom: 2rem;
+    /* text-align: left; */
+    height: fit-content;
+    color: #ffffff;
+}
+
+h5 {
+    padding-top: 10px;
+    font-size: 20px;
+}
+
+#des {
+    width: 90%;
+    margin-bottom: 10px;
+}
+
+.form {
+    width: 100%;
+}
+
+h6 {
+    font-size: 30px;
+}
+
+.content {
+    margin-bottom: 20px;
+}
+
+.delete {
+    color: #74c0fc !important;
+    cursor:pointer;
+}
+
+    .delete:hover {
+        color: #bf0d00 !important;
+    }
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 16px; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+/* Responsive */
+@media only screen and (max-width: 1199px) {
+    #btn-1 {
+        height: 50px;
+    }
+
+    #btn-2 {
+        height: 50px;
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: whitesmoke;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 20px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }

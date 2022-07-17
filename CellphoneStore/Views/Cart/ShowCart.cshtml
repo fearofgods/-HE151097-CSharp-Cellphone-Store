@@ -1,0 +1,92 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string size = (string)ViewData["CartSize"];
+    ViewData["Title"] = "Cart";
+
+}
+
+@using CellphoneStore.Models
+@using System.Globalization
+@model Cart
+
+@if (size.Equals("display"))
+{
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" colspan="2">Sản phẩm</th>
+                <th scope="col">Phân loại</th>
+                <th scope="col">Đơn giá</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Số tiền</th>
+                <th scope="col">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int id = 1;
+            }
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td scope="row">@(id++)</td>
+                    <td><img id="img-items" src="@(item.products.Image)" class="img-responsive" alt=""></td>
+                    <td>&nbsp;@(item.products.Name) </td>
+                    <td>@(item.colorDetail.Color) - @(item.storageDetail.Storage)</td>
+                    <td id="item-price" class="i-price">@(item.products.Price.ToString("C",CultureInfo.CreateSpecificCulture("vn-VN")).Substring(1).Replace(",","."))đ</td>
+                    <td>
+                        <div>
+                            <input type="hidden" value="@item.products.Id" name="pid">
+                            <input type="hidden" value="@item.colorDetail.Id" name="cid">
+                            <input type="hidden" value="@item.storageDetail.Id" name="sid">
+                            <a href="#">
+                                <input type="button" value="-" class="qty-btn remove-qty">
+                            </a>
+                            <input type="text" value="@item.quantity" name="qty" class="qty-in" readonly>
+                            <a href="#">
+                                <input type="button" value="+" class="qty-btn add-qty">
+                            </a>
+                        </div>
+                    </td>
+                    <td id="total-item-price" class="i-price">@((item.products.Price * item.quantity).ToString("C",CultureInfo.CreateSpecificCulture("vn-VN")).Substring(1).Replace(",","."))đ</td>
+                    <td>
+                        <input type="hidden" value="@item.products.Id" name="pid">
+                        <input type="hidden" value="@item.colorDetail.Id" name="cid">
+                        <input type="hidden" value="@item.storageDetail.Id" name="sid">
+                        <a class="delete"><i class="fa-solid fa-xmark"></i>&nbsp;Xóa</a>
+                    </td>
+                </tr>
+            }
+    </table>
+}
+else if (size.Equals("hidden"))
+{
+    <div class="col-12">
+        <div class="content">
+            <h1>Không có sản phẩm nào trong giỏ hàng</h1>
+        </div>
+    </div>
+}
+
+
+@if (size.Equals("display"))
+{
+    <div class="payment">
+        <div class="price"><span class="price-title">Tổng giá: </span><span class="price-total i-price">@(Model.GetTotalMoney().ToString("C",CultureInfo.CreateSpecificCulture("vn-VN")).Substring(1).Replace(",","."))đ</span></div>
+        <div class="confirm">
+            <a href="/Cart/Payment" id="submit"><input type="button" value="Thanh toán"></a>
+        </div>
+    </div>
+}
+
+@section Styles{
+<link rel="stylesheet" href="~/css/cart.css">
+}
+
+@section Scripts{
+<script src="~/js/cart.js"></script>
+}
