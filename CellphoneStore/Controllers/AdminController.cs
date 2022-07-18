@@ -272,5 +272,34 @@ namespace CellphoneStore.Controllers
             
 
         }
+
+        public IActionResult Orders()
+        {
+            ProductLogics productLogics = new ProductLogics();
+            List<Order> orders = productLogics.GetAllOrders();
+
+            return View(orders);
+        }
+
+        public IActionResult OrderDetails(int id)
+        {
+            UserLogics userLogics = new UserLogics();
+            ProductLogics productLogics = new ProductLogics();
+
+            List<OrderDetail> orderDetails = userLogics.GetOrderDetailsByOId(id);
+            List<Product> products = new List<Product>();
+            User user = productLogics.GetUserByOId(id);
+
+            foreach (OrderDetail orderDetail in orderDetails)
+            {
+                products.Add(productLogics.GetProductByPid(orderDetail.Pid));
+
+            }
+
+            ViewData["User"] = user;
+            ViewData["Products"] = products;
+
+            return View(orderDetails);
+        }
     }
 }

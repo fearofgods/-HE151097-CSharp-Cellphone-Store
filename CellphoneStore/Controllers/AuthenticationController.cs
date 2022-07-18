@@ -3,6 +3,7 @@ using CellphoneStore.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace CellphoneStore.Controllers
 {
@@ -129,6 +130,62 @@ namespace CellphoneStore.Controllers
 
             }
             return View();
+        }
+
+        public IActionResult ViewOrders()
+        {
+            UserLogics userLogics = new UserLogics();
+            string json = HttpContext.Session.GetString("user");
+            User userX = null;
+            if (!string.IsNullOrEmpty(json))
+            {
+                userX = JsonConvert.DeserializeObject<User>(json);
+            }
+
+            if (userX == null)
+            {
+                return Redirect("/");
+
+            }
+            else
+            {
+                List<Order> orders = userLogics.GetOrderByUname(userX.Username);
+                return View("~/Views/Authentication/MyOrders.cshtml", orders);
+
+            }
+        }
+
+        public IActionResult OrdersDetails(int id)
+        {
+            UserLogics userLogics = new UserLogics();
+            ProductLogics productLogics = new ProductLogics();
+
+            string json = HttpContext.Session.GetString("user");
+            User userX = null;
+            if (!string.IsNullOrEmpty(json))
+            {
+                userX = JsonConvert.DeserializeObject<User>(json);
+            }
+
+            if (userX == null)
+            {
+                return Redirect("/");
+
+            }
+            else
+            {
+                List<OrderDetail> orderDetails = userLogics.GetOrderDetailsByOId(id);
+                List<Product> products = new List<Product>();
+                foreach (OrderDetail orderDetail in orderDetails)
+                {
+                    products.Add(productLogics.GetProductByPid(orderDetail.Pid));
+
+                }
+
+                ViewData["Products"] = products;
+
+                return View("~/Views/Authentication/OrdersDetails.cshtml", orderDetails);
+            }
         }
     }
 }

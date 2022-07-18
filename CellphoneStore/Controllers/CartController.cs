@@ -165,7 +165,7 @@ namespace CellphoneStore.Controllers
             {
                 ViewData["CartSize"] = "display";
             }
-            string? json = HttpContext.Session.GetString("user");
+            string json = HttpContext.Session.GetString("user");
             User user = null;
             if (json != null) 
                 user = JsonConvert.DeserializeObject<User>(json);

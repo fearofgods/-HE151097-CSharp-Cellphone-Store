@@ -137,6 +137,16 @@ namespace CellphoneStore.Logics
             return context.StorageDetails.FirstOrDefault(x => x.Id == cid); 
         }
 
+        public List<Order> GetAllOrders()
+        {
+            return context.Orders.ToList();
+        }
+
+        public User GetUserByOId(int oid)
+        {
+            Order order = context.Orders.FirstOrDefault(x => x.Id == oid);
+            return context.Users.FirstOrDefault(x => x.Username.Equals(order.Uname));
+        }
         //Product details
 
         public ProductDetail GetProductDetail(string pid)

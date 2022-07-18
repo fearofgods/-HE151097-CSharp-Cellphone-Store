@@ -1,0 +1,70 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Order Details";
+    string json = Context.Session.GetString("user");
+    User userX = null;
+    if (!string.IsNullOrEmpty(json))
+    {
+        userX = JsonConvert.DeserializeObject<User>(json);
+    }
+
+    List<Product> products = (List<Product>)ViewData["Products"];
+}
+
+@using CellphoneStore.Models
+@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@model List<OrderDetail>
+
+<div class="row">
+    <div class="col-12 dilivery-info">
+        <h2>Thông tin vận chuyển</h2>
+        <p>Họ và tên: @userX.Firstname @userX.Lastname</p>
+        <p>Địa chỉ: @userX.Address</p>
+        <p>Số điện thoại: @userX.Phone</p>
+        <p>Ghi chú: </p>
+        <textarea id="des" readonly>@(Model.FirstOrDefault().Description!=null?Model.First().Description:"")</textarea>
+    </div>
+
+    <table class="table table-dark">
+
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" colspan="2">Sản phẩm</th>
+                <th scope="col">Phân loại</th>
+                <th scope="col">Đơn giá</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Số tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @for (var i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td scope="row">@(i+1)</td>
+                    <td>
+                        <img id="img-items" src="@products[i].Image" class="img-responsive" alt="">
+                    </td>
+                    <td>&nbsp;@products[i].Name</td>
+                    <td>@Model[i].Color - @Model[i].Storage </td>
+                    <td id="item-price">@Model[i].Price</td>
+                    <td>
+                        <div>
+                            <input type="text" value="@Model[i].Quantity" name="qty"
+                               class="qty-in" readonly>
+                        </div>
+                    </td>
+                    <td id="total-item-price">@Model[i].TotalPrice</td>
+                </tr>
+            }
+    </table>
+</div>
+
+@section Styles{
+<link rel="stylesheet" href="~/css/cart.css">
+}

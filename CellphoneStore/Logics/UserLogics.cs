@@ -142,5 +142,15 @@ namespace CellphoneStore.Logics
 
             return 1;
         }
+
+        public List<Order> GetOrderByUname(string uname)
+        {
+            return context.Orders.Where(x => x.Uname.Equals(uname)).ToList();
+        }
+
+        public List<OrderDetail> GetOrderDetailsByOId(int oid)
+        {
+            return context.OrderDetails.Where(x => x.Oid == oid).ToList();
+        }
     }
 }

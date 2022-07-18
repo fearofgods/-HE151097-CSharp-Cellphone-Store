@@ -7,6 +7,7 @@ namespace CellphoneStore.Models
 {
     public partial class OrderDetail
     {
+        public int Id { get; set; }
         public int Oid { get; set; }
         public string Pid { get; set; }
         public int Quantity { get; set; }

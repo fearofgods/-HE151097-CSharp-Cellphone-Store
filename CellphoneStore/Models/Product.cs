@@ -10,6 +10,7 @@ namespace CellphoneStore.Models
         public Product()
         {
             ColorDetails = new HashSet<ColorDetail>();
+            OrderDetails = new HashSet<OrderDetail>();
             ProductDetails = new HashSet<ProductDetail>();
             StorageDetails = new HashSet<StorageDetail>();
         }
@@ -25,6 +26,7 @@ namespace CellphoneStore.Models
 
         public virtual Category CidNavigation { get; set; }
         public virtual ICollection<ColorDetail> ColorDetails { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<ProductDetail> ProductDetails { get; set; }
         public virtual ICollection<StorageDetail> StorageDetails { get; set; }
     }
