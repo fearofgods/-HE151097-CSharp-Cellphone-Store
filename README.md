@@ -1,4 +1,4 @@
-# -HE151097-CSharp-Cellphone-Store
-Class: SE1611 .NET 
+# Cellphone-Store C#
 
-Project using C# .NET MVC Core
+Front-end: Jquery, Bootstrap 4
+Back-end: C# .NET MVC Core, MS-SQL
